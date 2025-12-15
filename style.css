@@ -1,0 +1,626 @@
+/* =========================================
+   1. VARIABLES Y CONFIGURACIÓN GENERAL
+   ========================================= */
+   :root {
+    /* Paleta General */
+    --primary-pink: #ffffff; /* Misty Rose */
+    --deep-red: #b0304b;     /* Rojo Vino suave */
+    --accent-red: #dc143c;   /* Crimson */
+    --white: #ffffff;
+    --glass: rgba(255, 255, 255, 0.90); /* Vidrio esmerilado */
+    --shadow: 0 10px 30px rgba(0,0,0,0.1);
+    --gold: #d4af37;         /* Dorado elegante */
+
+    /* Paleta Específica del Sobre (Efecto 3D) */
+    --env-inside: #f8f5f0;   /* Interior oscuro */
+    --env-flaps: #f8f5f0;    /* Solapas laterales */
+    --env-top: #f8f5f0;      /* Solapa superior (más luz) */
+    --wax-gold: #d4af37;     /* Sello de lacre */
+}
+
+
+
+#BYL {
+    font-family: 'Playfair Display', serif;
+    color: #d4af37;
+    font-size: 9em;
+    font-weight: lighter;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(135deg, #fcf4e9  0%, #ffffff 100%);
+    color: #4a4a4a;
+    overflow-x: hidden;
+    min-height: 100vh;
+    text-align: center;
+}
+
+/* =========================================
+   2. PANTALLA DE BIENVENIDA (SOBRE DE LUJO)
+   ========================================= */
+/* 1. EL CONTENEDOR (La pantalla completa) */
+#welcome-screen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #ffffff 0%, #ffffff 100%);
+    
+    /* ESTO ASEGURA EL CENTRADO PERFECTO: */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    z-index: 10000;
+    transition: opacity 0.8s, visibility 0.8s;
+}
+
+/* 2. EL ENVOLTORIO (Lo que hacemos gigante) */
+.envelope-wrapper {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.021));
+
+    /* Escala X2 */
+    transform: scale(2);
+    
+    /* IMPORTANTE: Quitamos los márgenes. 
+       El 'display: flex' del padre ya se encarga de centrarlo. */
+    margin: 0; 
+}
+
+/* 3. EL HOVER (Ajuste suave) */
+.envelope-wrapper:hover {
+    /* Crece un poquito más (2.1) pero sin moverse de lugar */
+    transform: scale(2.1);
+}
+
+.envelope {
+    width: 320px;
+    height: 220px;
+    background: var(--env-inside); /* Fondo interior oscuro */
+    position: relative;
+    border-radius: 0 0 8px 8px;
+    display: flex;
+    justify-content: center;
+    perspective: 1000px; /* Profundidad 3D */
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+}
+
+/* La Carta */
+.letter {
+    position: absolute;
+    bottom: 0;
+    width: 92%;
+    height: 92%;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 90%;
+    font-weight: lighter;
+
+    background: #fffcf5; /* Blanco crema */
+    color: var(--gold);
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.7s cubic-bezier(.4,.1,.2,1) 0.4s;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 3px double var(--gold); /* Marco doble elegante */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Las Solapas (Triángulos) */
+.flap {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    z-index: 2;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+}
+
+.flap.left {
+    border-width: 110px 0 110px 160px;
+    border-color: transparent transparent transparent var(--env-flaps);
+    left: 0; top: 0;
+}
+
+.flap.right {
+    border-width: 110px 160px 110px 0;
+    border-color: transparent var(--env-flaps) transparent transparent;
+    right: 0; top: 0;
+}
+
+.flap.bottom {
+    border-width: 0 160px 120px 160px;
+    border-color: transparent transparent var(--env-flaps) transparent;
+    bottom: 0; left: 0;
+}
+
+/* Solapa Superior (con animación) */
+.flap.top {
+    border-width: 125px 160px 0 160px;
+    border-color: var(--env-top) transparent transparent transparent;
+    top: 0; left: 0;
+    transform-origin: top;
+    transition: transform 0.6s cubic-bezier(.4,.1,.2,1);
+    z-index: 3;
+}
+
+
+
+
+
+
+
+
+
+
+/* SELLO PERSONALIZADO (IMAGEN PNG) */
+.flap.top::after {
+    content: '';
+    position: absolute;
+    
+
+    /* Tamaño del sello */
+    width: 75px; 
+    height: 75px;
+
+
+    /* --- EL TRUCO DEL CENTRADO HORIZONTAL PERFECTO --- */
+    left: 50%; 
+    transform: translateX(-50%); 
+
+    /* --- POSICIÓN VERTICAL (ARRIBA/ABAJO) --- */
+    /* Ajusta este número para subir o bajar el sello en la punta */
+    /* Si cambias el tamaño de la imagen, quizás tengas que ajustar esto un poco */
+    bottom: -15px;
+    
+    
+    /* --- AQUÍ ESTÁ EL CAMBIO --- */
+    /* 1. Pon aquí la ruta de tu imagen PNG */
+    background-image: url('./assets/sello_ByL.png'); 
+    
+    /* 2. Ajustes para que la imagen se vea bien */
+    background-size: cover;      /* Hace que la imagen llene todo el espacio */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que se repita como mosaico */
+    
+    /* 3. Estética */
+    border-radius: 0%; /* Mantenlo si quieres que la imagen se recorte en círculo. Si tu PNG es irregular, quita esta línea */
+
+    
+    /* Animación de desaparición al abrir */
+    transition: opacity 0.3s ease 0.2s;
+
+    animation: pulso-suave 1.5s infinite ease-in-out;
+
+}
+
+
+
+
+
+
+
+
+
+/* --- Animaciones de Apertura --- */
+.open .flap.top { transform: rotateX(180deg); z-index: 0; }
+.open .flap.top::after, .open .flap.top::before { opacity: 0; } /* Ocultar sello al abrir */
+.open .letter { transform: translateY(-140px) scale(1.05); z-index: 4; box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+
+.click-hint {
+    margin-top: 60px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: var(--deep-red);
+    text-transform: uppercase;
+    animation: pulse 2s infinite;
+}
+
+/* =========================================
+   3. CONTENIDO PRINCIPAL Y HERO
+   ========================================= */
+#main-content {
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    display: none; /* Se activa con JS */
+}
+
+/* Video Hero */
+.hero {
+    height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    background-color: transparent;
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%); /* Centrado perfecto */
+    width: 90%; max-width: 1200px;
+    height: 80vh;
+    object-fit: cover;
+    z-index: 1;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.hero-text {
+    position: relative; z-index: 10;
+    background: transparent;
+    padding: 3rem;
+    border-radius: 5px;
+    max-width: 80%;
+}
+
+/* =========================================
+   4. TIPOGRAFÍA Y ESTILOS DE TEXTO
+   ========================================= */
+h1 { font-family: 'Great Vibes', cursive; font-size: 5rem; color: var(--deep-red); margin-bottom: 10px; }
+.titulo-dorado { 
+    font-family: 'Great Vibes'; 
+    color: goldenrod; 
+    font-size: 3.5em; 
+    margin-bottom: 20px;}
+
+h3 { font-family: 'Playfair Display'; 
+    color: var(--deep-red); 
+    font-size: 2em; 
+    margin-bottom: 10px; }
+
+.names { 
+    font-family: 'EB Garamond'; 
+    color: #444; 
+    font-size: 1.8em; 
+    font-weight: lighter; 
+}
+
+.names-destacado { font-family: 'Cormorant Garamond'; font-size: 2rem; color: var(--gold); }
+
+
+.verso{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'EB Garamond';
+    font-size: 2em;
+}
+
+
+
+.resalted { 
+    font-family: 'Cinzel'; 
+    color: var(--gold); 
+    font-size: 2em; }
+
+p {
+    font-family: 'EB Garamond'; 
+    color: #444; 
+    font-size: 2em; 
+    font-weight: lighter; 
+    line-height: 1.6;
+}
+
+/* =========================================
+   5. SECCIONES Y LAYOUT (GRID)
+   ========================================= */
+.seccion-boda {
+    padding: 60px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Grid para Padres y Padrinos */
+.grid-padres {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+.columna-padres {
+    flex: 1;
+    min-width: 250px;
+    padding: 10px;
+}
+
+/* Itinerario */
+.timeline {
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.evento {
+    display: flex;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #ccc;
+}
+.hora {
+    font-weight: bold;
+    color: var(--deep-red);
+    width: 90px;
+    flex-shrink: 0;
+    font-family: 'Cinzel';
+}
+
+/* Datos Bancarios y Regalos */
+.datos-bancarios {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.info-banco { margin: 5px 0; font-size: 1.1rem; color: #333; }
+
+/* Iconos Vestimenta */
+.iconos-vestimenta {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 30px 0;
+}
+.item-ropa strong {
+    display: block;
+    color: var(--deep-red);
+    margin-bottom: 5px;
+    font-family: 'Playfair Display';
+}
+
+/* =========================================
+   6. BOTONES E INTERACCIÓN
+   ========================================= */
+.btn, .btn-mapa {
+    background-color: var(--deep-red);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    transition: 0.3s;
+    font-family: 'Montserrat', sans-serif;
+}
+.btn:hover, .btn-mapa:hover {
+    background-color: var(--accent-red);
+    transform: translateY(-2px);
+}
+
+/* Animación de pulso para el texto "Click para abrir" */
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+
+
+/* --- ANIMACIÓN DEL SELLO --- */
+@keyframes pulso-suave {
+    0%, 100% {
+        transform: translateX(-50%) scale(1); /* Mantiene el centrado */
+    }
+    50% {
+        transform: translateX(-50%) scale(1.5); /* Crece un 10% */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   7. DISEÑO ZIG-ZAG (FOTOS INTERCALADAS)
+   ========================================= */
+
+/* Contenedor general de la fila */
+.fila-contenido {
+    display: flex;             /* Pone los elementos lado a lado */
+    align-items: center;       /* Los centra verticalmente */
+    justify-content: center;
+    gap: 40px;                 /* Espacio entre texto y foto */
+    max-width: 1100px;         /* Ancho máximo para que no se estire demasiado */
+    margin: 0 auto;            /* Centrado en la página */
+    padding: 20px;
+    background-color: #f0d695
+    ;
+}
+
+/* Las dos columnas ocupan el mismo ancho (50% y 50%) */
+.col-texto, .col-foto {
+    flex: 1; 
+}
+
+/* Estilo de las fotos */
+.col-foto img {
+    width: 100%;               /* Que ocupe todo el ancho de su columna */
+    height: 650px;             /* Altura fija para que todas sean iguales */
+    object-fit: cover;         /* Recorta la imagen para que no se deforme */
+    border-radius: 5px;       /* Bordes redondeados */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Sombra elegante */
+    transition: filter 1s ease, transform 1s ease;
+}
+
+.col-foto img:hover {
+    transform: scale(1.02);
+}
+
+/* CLASE MÁGICA: INVERTIR ORDEN */
+/* Cuando usamos esta clase, la foto pasa a la izquierda y el texto a la derecha */
+.invertido {
+    flex-direction: row-reverse; 
+}
+
+
+@media (max-width: 768px) {
+    
+    /* 1. ARREGLO DEL VIDEO */
+    .hero {
+        /* En celular, que ocupe toda la altura disponible */
+        height: 100vh; 
+    }
+    
+    .hero-video {
+        /* Que el video llene toda la pantalla sin bordes */
+        width: 100%; 
+        height: 100%; 
+        max-width: none; /* Quitamos el límite de 1200px */
+        border-radius: 0; /* Quitamos bordes redondeados para que se vea full screen */
+        
+        /* Esto asegura que se vea el centro del video. 
+           NOTA: Si el video es horizontal, SIEMPRE se cortarán los lados 
+           en un celular vertical. Es inevitable para llenar la pantalla. */
+        object-fit: cover; 
+    }
+
+    .hero-text {
+        width: 95%; /* Más ancho para que el texto quepa */
+        padding: 1rem; /* Menos relleno */
+    }
+
+    /* 2. ARREGLO DE TEXTOS GIGANTES */
+    
+    /* Título "NOS CASAMOS" */
+    .hero-text .resalted {
+        font-size: 1.5em !important; /* Más pequeño */
+    }
+
+    /* Nombres "Bryan & Lucila" (Estaba en 9em, lo bajamos a 4em) */
+    #BYL {
+        font-size: 4em !important; 
+        line-height: 1.1; /* Para que no se separen mucho */
+    }
+    
+    /* La fecha */
+    .subtitle {
+        font-size: 1.5em !important;
+    }
+
+    /* Títulos Dorados de Secciones */
+    .titulo-dorado {
+        font-size: 2.2em; /* Bajamos de 3.5 a 2.2 */
+    }
+
+    /* Versículos y Texto normal */
+    .verso, p {
+        font-size: 1.1em !important; /* Letra de lectura cómoda (aprox 18px) */
+        padding: 0 10px; /* Un poco de margen a los lados */
+    }
+    
+    h3 {
+        font-size: 1.3em;
+    }
+
+    /* 3. ARREGLO DE LA ESTRUCTURA (ZIG-ZAG) */
+    .fila-contenido, .invertido { 
+        flex-direction: column !important; /* Pone foto y texto uno debajo de otro */
+        gap: 20px; 
+    }
+    
+    .col-foto img { 
+        height: 350px; /* Altura controlada para la foto en celular */
+        max-width: 100%; 
+    }
+
+    /* Grid de Padres (Uno debajo del otro) */
+    .grid-padres {
+        gap: 20px;
+    }
+    
+    .columna-padres {
+        margin-bottom: 20px;
+        border-bottom: 1px dashed #ccc; /* Separador sutil entre familias */
+        padding-bottom: 20px;
+    }
+
+    /* 4. ARREGLO DEL SOBRE */
+    .envelope-wrapper { 
+        transform: scale(1.1); /* Tamaño normal para celular */
+    }
+    .envelope-wrapper:hover { 
+        transform: scale(1.15); 
+    }
+    
+    /* Ajuste para que el sello no quede gigante en celular */
+    .flap.top::after {
+        width: 60px;
+        height: 60px;
+        bottom: -10px;
+    }
+}
+
+
+
+
+
+
+/* Botón de WhatsApp */
+.btn-whatsapp-1 {
+    display: inline-block;
+    background-color: #e927cf; /* Verde oficial de WhatsApp */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); /* Sombra verde suave */
+    transition: transform 0.3s ease, background-color 0.3s;
+    margin-top: 20px;
+}
+
+.btn-whatsapp-1:hover {
+    background-color: #128C7E; /* Verde más oscuro al pasar el mouse */
+    transform: translateY(-3px); /* Efecto de elevación */
+}
+
+
+
+
+/* Botón de WhatsApp */
+.btn-whatsapp-2 {
+    display: inline-block;
+    background-color: #5053f8; /* Verde oficial de WhatsApp */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); /* Sombra verde suave */
+    transition: transform 0.3s ease, background-color 0.3s;
+    margin-top: 20px;
+}
+
+.btn-whatsapp-2:hover {
+    background-color: #128C7E; /* Verde más oscuro al pasar el mouse */
+    transform: translateY(-3px); /* Efecto de elevación */
+}

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan & Lucila | Nuestra Boda</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <audio id="wedding-music" loop>
+        <source src="./assets/musica_boda.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="welcome-screen">
+        <div class="envelope-wrapper" onclick="openEnvelope()">
+            <div class="envelope" id="envelope">
+                <div class="flap top"></div><div class="flap right"></div><div class="flap bottom"></div><div class="flap left"></div>
+                <div class="letter">
+                    <h2>Están invitados</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        
+        <section class="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="./assets/entrega_anillo.mp4" type="video/mp4">
+            </video>
+
+            <div class="hero-text">
+                <h1 class="resalted" style="font-size: 2em;">NOS CASAMOS</h1>
+                <h1 id="BYL">Bryan <span style="font-family: 'Great Vibes', serif; font-weight: bolder; font-size: 50%;">&</span> Lucila</h1>
+                <p class="subtitle" style="color: goldenrod; font-size: 3em; font-weight: bold;">-10.01.2026-</p>
+            </div>
+        </section>
+
+        <section class="seccion-boda">
+            <h2 class="verso">«Y si alguno prevaleciere contra uno, dos le resistirán; </h2>
+            <h2 class="verso">cordón de tres dobleces no se rompe pronto.»</h2>
+            <h3>Eclesiástes 4:12</h3>
+        </section>
+
+        <section class="seccion-boda">
+            <p>Queridos familiares y amigos, es un placer invitarlos a este momento único en nuestras vidas. </p>
+            <p>Celebraremos la unión de dos almas que Dios ha destinado para amarse.</p>
+            <p>Es un gran honor para nosotros contar con su compañía.</p>
+        </section>
+
+        <section class="seccion-boda">
+            <p>«No hay nada más hermoso en la vida que la unión de dos personas cuyo amor mutuo ha crecido a través de los años desde la pequeña bellota de la pasión hasta un gran árbol arraigado. Sobreviviendo a todas las vicisitudes y rico en sus múltiples ramas, cada hoja con su propio significado»</p>
+        </section>
+
+        <section id="familia" class="seccion-boda">
+            <h2 class="verso">«Las muchas aguas no podrán apagar el amor,</h2>
+            <h2 class="verso">Ni lo ahogarán los ríos.»</h2>
+            <h3>Cantares 8:7</h3>
+
+        </section>
+
+
+        <section id="padres-novios" class="seccion-boda">
+            <h2 class="resalted">Con la bendición de Dios y de nuestros Padres</h2>
+            
+            <div class="fila-contenido">
+                <div class="col-texto">
+                    <div class="grid-padres">
+                        <div class="columna-padres">
+                            <h3>Padres del novio</h3>
+                            <p class="names">Aquiles Javier León Rivera</p>
+                            <p class="names">Julia Milagro Ugarte Rojas</p>
+                        </div>
+                        <div class="columna-padres">
+                            <h3>Padres de la novia</h3>
+                            <p class="names">Alfredo Jesús Campos Nicho</p>
+                            <p class="names">Edelmira Inés Lizárraga Garay</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-foto">
+                    <img src="./assets/luci_bryan_2.png" alt="Luci and me">
+                </div>
+            </div>
+        </section>
+        
+        <section id="corte" class="seccion-boda">
+            <div class="fila-contenido invertido">
+                
+                <div class="col-texto">
+                    <div class="grid-padres">
+                        <div class="columna-padres">
+                            <h3>Padrinos</h3>
+                            <p class="names">Christopher León & Lizeth Ch.</p>
+                            <p class="names">Raúl Lizárraga & Luisa Meza</p>
+                        </div>
+                        <div class="columna-padres">
+                            <h3>Testigos</h3>
+                            <p class="names">Percy Leoncio Serna Berrocal</p>
+                            <p class="names">Yraida Yasmin Diaz Romero</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-foto">
+                    <img src="./assets/luci_y_yo_4.png" alt="Luci and me 2">
+                </div>
+
+            </div>
+        </section>
+        
+        <section id="itinerario" class="seccion-boda">
+            <h2 class="titulo-dorado">Itinerario</h2>
+            <div class="timeline">
+                <div class="evento">
+                    <div class="hora">12:00 pm</div>
+                    <div class="detalle">
+                        <strong>Boda Religiosa</strong>
+                        <span>Playa Santa Roja</span>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="hora">2:00 pm</div>
+                    <div class="detalle">
+                        <strong>Toma de Fotos</strong>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="hora">3:00 pm</div>
+                    <div class="detalle">
+                        <strong>Recepción</strong>
+                        <span>Salón y Recepciones LANCON: Club de Tiro</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ubicacion" class="seccion-boda">
+            <h2 class="titulo-dorado">Lugar</h2>
+            
+            <div class="fila-contenido">
+                <div class="col-texto">
+                    <h3>Playa Santa Rosa</h3>
+                    <p>Celebremos juntos frente al mar.</p>
+                    <div class="mapa-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12148.035676405385!2d-77.18947071815!3d-11.79134428288651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105d5455da91c55%3A0x62b5032b9e98695d!2sPlaya%20Grande!5e1!3m2!1ses!2spe!4v1765763674452!5m2!1ses!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <div class="col-foto">
+                    <img src="./assets/luci_bryan_3.png" alt="Luci and me 3">
+                </div>
+            </div>
+        </section>
+        <section id="regalos" class="seccion-boda">
+            <h2 class="titulo-dorado">Mesa de Regalos</h2>
+            <p class="texto-regalo">
+                Su presencia es lo más importante, pero si desean tener un detalle con nosotros:
+            </p>
+        
+            <div class="datos-bancarios">
+                <div class="cuenta">
+                    <strong>Bryan León Ugarte</strong>
+                    <p class="info-banco">BCP: 19337501311011</p>
+                    <p class="info-banco">CCI: 00219313750131101114</p>
+                    <p class="info-banco">Yape: 960186786</p>
+                </div>
+                <hr> 
+                <div class="cuenta">
+                    <strong>Lucila Campos Lizárraga</strong>
+                    <p class="info-banco">Yape: 961488956</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="dresscode" class="seccion-boda">
+            <h2 class="titulo-dorado">Código de Vestimenta</h2>
+            <div class="iconos-vestimenta">
+                <div class="item-ropa">
+                    <strong>Hombres</strong>
+                    <p>Traje</p>
+                </div>
+                <div class="item-ropa">
+                    <strong>Mujeres</strong>
+                    <p>Maxi Vestido</p>
+                </div>
+
+            </div>
+
+            <p class="resalted advertencia" style="color: var(--accent-red); font-size: 120%;">
+                (NOS RESERVAMOS EL COLOR BLANCO PARA LA NOVIA)</p>
+
+            <p style="margin-top: 20px;">Esperamos contar con tu presencia.</p>
+
+            <a href="https://wa.me/51960186786?text=Hola%20Bryan%20y%20,%20confirmo%20mi%20asistencia%20a%20su%20boda%20%F0%9F%92%92" 
+            class="btn-whatsapp-2" 
+            target="_blank">
+            Confirmar por WhatsApp a Bryan
+            </a>
+
+            <a href="https://wa.me/5491123633656?text=Hola%20Lucila,%20confirmo%20mi%20asistencia%20a%20su%20boda%20%F0%9F%92%92" 
+               class="btn-whatsapp-1" 
+               target="_blank">
+               Confirmar por WhatsApp a Luci
+            </a>
+
+
+
+
+            <p class="nota-ninos" style="margin-top:20px; font-family: 'Comic Sans MS'; font-size: 140%;">Respetuosamente: NO NIÑOS</p>
+        </section>
+
+        <footer style="text-align: center; padding: 2rem; color: var(--deep-red); background: var(--primary-pink);">
+            <p style="font-family: 'Great Vibes', cursive; font-size: 1.5rem;">Con amor, Bryan y Lucila</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- 1. Lógica del Sobre ---
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const mainContent = document.getElementById('main-content');
+            const music = document.getElementById('wedding-music');
+            
+            envelope.classList.add('open');
+            
+            // Intentar reproducir música
+            music.volume = 0.5;
+            music.play().catch(e => console.log("Audio bloqueado hasta interacción"));
+
+            // Desvanecer pantalla de bienvenida
+            setTimeout(() => {
+                welcomeScreen.style.opacity = '0';
+                welcomeScreen.style.visibility = 'hidden';
+                mainContent.style.display = 'block';
+                // Pequeño retardo para permitir que el display block procese antes de la opacidad
+                setTimeout(() => { mainContent.style.opacity = '1'; }, 50);
+            }, 1500);
+        }
+
+        // --- 2. Lógica del Nombre Personalizado ---
+        // Obtenemos el nombre desde la URL (ej: miboda.com/?invitado=Tio_Juan)
+        const parametros = new URLSearchParams(window.location.search);
+        const nombreURL = parametros.get('invitado');
+        const etiquetaSaludo = document.getElementById('saludo-invitado');
+        
+        // CORRECCIÓN: Quitamos la referencia al input oculto que ya no existe
+        if (nombreURL) {
+            const nombreLimpio = decodeURIComponent(nombreURL);
+            etiquetaSaludo.innerText = "Hola, " + nombreLimpio;
+            
+            // BUSCAMOS AMBOS BOTONES
+            const botones = document.querySelectorAll('.btn-whatsapp-1, .btn-whatsapp-2');
+            
+            // ACTUALIZAMOS EL LINK EN AMBOS
+            botones.forEach(btn => {
+                btn.href += "%20Soy%20" + encodeURIComponent(nombreLimpio);
+            });
+        }
+    </script>
+</body>
+</html>
